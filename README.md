@@ -23,3 +23,5 @@ docker run --rm --network="host" $(docker build -q .) client -host localhost:808
 ## Proof Of Work
 
 sha256 is used as the hash function. This algorithm is easy to implement and configure.
+
+But I think for production it is better to use Script, since it is more memory-intensive. I started refactoring, but it requires quite subtle tuning of parameters depending on the given complexity https://github.com/fullpipe/word_of_wisdom/pull/1
