@@ -11,6 +11,5 @@ func Validate(p Puzzle, s Solution) bool {
 	hasher.Write(p.Question)
 	hasher.Write(s.Answer)
 
-	// TODO: check bytes for performance
 	return strings.HasPrefix(string(hasher.Sum(nil)), strings.Repeat("0", p.Complexity))
 }

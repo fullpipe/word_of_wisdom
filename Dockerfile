@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -a -o /go/bin/app
+RUN go build -o /go/bin/app
 
 FROM scratch
 COPY --from=build /go/bin/app /go/bin/app

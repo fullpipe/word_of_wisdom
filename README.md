@@ -11,7 +11,7 @@ Design and implement “Word of Wisdom” tcp server.
 Run server with one client
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 Run client separately

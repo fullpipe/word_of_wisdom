@@ -23,8 +23,8 @@ func NewServer() *cli.Command {
 				Name:  "complexity",
 				Value: 2,
 				Action: func(ctx *cli.Context, v int) error {
-					if v < 1 || v > 10 {
-						return fmt.Errorf("complexity value %v out of range[1-10]", v)
+					if v < 1 || v > 5 {
+						return fmt.Errorf("complexity value %v out of range[1-5]", v)
 					}
 
 					return nil
