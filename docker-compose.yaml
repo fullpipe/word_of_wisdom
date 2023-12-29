@@ -1,0 +1,12 @@
+version: '3'
+services:
+  server:
+    build: .
+    command: ['server', '-host', '0.0.0.0:8080', '-complexity', '3']
+    ports:
+      - '8080:8080'
+  client:
+    build: .
+    command: ['client', '-host', 'server:8080']
+    depends_on:
+      - server
