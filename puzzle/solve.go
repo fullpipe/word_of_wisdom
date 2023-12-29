@@ -6,7 +6,17 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func Solve(p Puzzle) Solution {
+type Solver struct {
+	validator *Validator
+}
+
+func NewSolver() *Solver {
+	return &Solver{
+		validator: NewValidator(),
+	}
+}
+
+func (s *Solver) Solve(p Puzzle) Solution {
 	solution := Solution{}
 
 	for {
@@ -17,7 +27,7 @@ func Solve(p Puzzle) Solution {
 			logrus.Fatal(err)
 		}
 
-		if Validate(p, solution) {
+		if s.validator.Validate(p, solution) {
 			return solution
 		}
 	}

@@ -27,7 +27,8 @@ func StartClient(ctx context.Context, conn net.Conn) error {
 
 	logrus.Infof("solving puzzle with Complexity: %d", p.Complexity)
 
-	solution := puzzle.Solve(p)
+	solver := puzzle.NewSolver()
+	solution := solver.Solve(p)
 
 	logrus.Infof("solved with %d attempts", solution.Attempts)
 

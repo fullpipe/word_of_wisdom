@@ -1,16 +1,30 @@
 package puzzle
 
 import (
-	"crypto/sha256"
+	"crypto/rand"
+	"log"
 	"strings"
+
+	"golang.org/x/crypto/scrypt"
 )
 
-func Validate(p Puzzle, s Solution) bool {
-	hasher := sha256.New()
+type Validator struct {
+	salt []byte
+}
 
-	hasher.Write(p.Question)
-	hasher.Write(s.Answer)
+func NewValidator() *Validator {
+	v := &Validator{}
 
-	// TODO: check bytes for performance
-	return strings.HasPrefix(string(hasher.Sum(nil)), strings.Repeat("0", p.Complexity))
+	rand.Read(v.salt)
+
+	return v
+}
+
+func (v *Validator) Validate(p Puzzle, s Solution) bool {
+	dk, err := scrypt.Key(append(p.Question[:], s.Answer[:]...), v.salt, 4, 8, 1, 32)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return strings.HasPrefix(string(dk), strings.Repeat("0", p.Complexity))
 }

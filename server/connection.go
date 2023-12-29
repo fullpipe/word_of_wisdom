@@ -65,7 +65,8 @@ func (c *Connection) Run(serverCtx context.Context) error {
 				return errors.Wrap(err, "unable to decode solution")
 			}
 
-			if !puzzle.Validate(p, solution) {
+			validator := puzzle.NewValidator()
+			if !validator.Validate(p, solution) {
 				cancel()
 				return errors.New("invalid solution")
 			}
